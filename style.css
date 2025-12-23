@@ -1,0 +1,220 @@
+/* ========================
+   RESET & DASAR
+   ======================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Mencegah scrollbar ganda */
+}
+
+/* Peta Wajib Full Screen */
+#map {
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+/* ========================
+   KOMPONEN: KOTAK PENCARIAN (Modern Style)
+   ======================== */
+.search-box {
+    position: absolute;
+    top: 10px;          /* Sejajar dengan tombol Zoom */
+    left: 55px;         /* Geser ke kanan tombol Zoom (Zoom width ~30px + margin) */
+    z-index: 1000;
+    
+    /* Tampilan Kotak Putih Cantik */
+    background: white;
+    padding: 5px;
+    border-radius: 4px; /* Sudut sedikit melengkung */
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4); /* Bayangan biar terlihat mengambang */
+    
+    /* Flexbox biar tombol & input rapi */
+    display: flex;
+    align-items: center;
+    height: 34px;       /* Samakan tinggi dengan tombol Zoom Leaflet biar rapi */
+}
+
+.search-box input {
+    border: none;       /* Hilangkan garis border bawaan */
+    outline: none;      /* Hilangkan garis biru saat diklik */
+    padding: 0 10px;
+    font-size: 14px;
+    width: 200px;       /* Lebar kotak ketik */
+    font-family: inherit;
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 10px;
+    color: #555;
+    border-left: 1px solid #eee; /* Garis pemisah tipis */
+    height: 100%;
+    transition: color 0.3s;
+}
+
+.search-box button:hover {
+    color: #d32f2f; /* Merah saat di-hover */
+}
+
+/* ========================
+   KOMPONEN: KOTAK INPUT (Form)
+   ======================== */
+.report-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 300px;
+    transition: all 0.3s ease; /* Efek halus saat berubah ukuran */
+}
+
+.report-box h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 18px;
+}
+
+.report-box p {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.readonly-input {
+    background-color: #f0f2f5;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.btn-kirim {
+    width: 100%;
+    padding: 12px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s;
+    margin-top: 5px;
+}
+
+.btn-kirim:hover {
+    background-color: #b71c1c;
+}
+
+/* ========================
+   KOMPONEN: LEGENDA
+   ======================== */
+.legend {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 200px;
+}
+
+.legend h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* ========================
+   RESPONSIVE (Tampilan HP)
+   ======================== */
+@media (max-width: 768px) {
+    
+    /* 1. Search Box: Tetap di atas, sebelah Zoom */
+    .search-box {
+        top: 10px;
+        left: 55px;   /* Sebelah tombol zoom */
+        right: 10px;  /* Mentok ke kanan (biar inputnya panjang) */
+        width: auto;  /* Lebar otomatis */
+    }
+    
+    .search-box input {
+        width: 100%; /* Input memenuhi lebar layar yang tersisa */
+    }
+
+    /* 2. Form Input: Pindah ke Bawah (Bottom Sheet) */
+    .report-box {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        padding: 15px 20px;
+        box-sizing: border-box;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    
+    .report-box p {
+        display: none; /* Sembunyikan teks instruksi di HP */
+    }
+
+    /* 3. SOLUSI LEGENDA: Pindah ke KANAN, agak turun */
+    .legend {
+        top: 60px;    /* Turun ke bawah (supaya gak ketutup Search Box) */
+        right: 10px;  /* Pindah ke Sisi Kanan */
+        left: auto;   /* Hapus posisi Kiri */
+        bottom: auto; /* Hapus posisi Bawah */
+        
+        max-width: 150px; /* Kecilin dikit biar gak makan tempat */
+        font-size: 11px;
+        padding: 8px;
+    }
+    
+    .legend h4 {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    /* Geser tombol Layer (Ganti Peta) ke bawah dikit jika perlu */
+    .leaflet-control-layers {
+        margin-top: 50px;
+    }
+}

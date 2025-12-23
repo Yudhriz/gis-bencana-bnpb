@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Peta Sebaran Bencana BNPB 2024</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="inputCari"
+        list="daftarKota"
+        placeholder="Cari Kota/Kabupaten..."
+      />
+      <datalist id="daftarKota"> </datalist>
+      <button onclick="cariLokasi()">🔍</button>
+    </div>
+
+    <div class="legend">
+      <h4>Legenda Risiko</h4>
+      <div>
+        <span class="dot" style="background: #d32f2f"></span> Tinggi (>20)
+      </div>
+      <div>
+        <span class="dot" style="background: #ff9800"></span> Waspada (5-20)
+      </div>
+      <div><span class="dot" style="background: #4caf50"></span> Aman (<5)</div>
+      <div><span class="dot" style="background: blue"></span> Laporan Baru</div>
+    </div>
+
+    <div class="report-box">
+      <h3>Lapor Bencana</h3>
+      <p>Isi data, pilih radius dampak, lalu <b>klik lokasi di peta</b>.</p>
+
+      <div class="input-group">
+        <input type="text" id="inputNama" placeholder="Nama Pelapor" />
+      </div>
+      <div class="input-group">
+        <input type="text" id="inputLokasi" placeholder="Keterangan Bencana" />
+      </div>
+
+      <div class="input-group">
+        <select
+          id="inputRadius"
+          style="
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+          "
+        >
+          <option value="0">Hanya Titik (Tanpa Area)</option>
+          <option value="500">Dampak Kecil (Radius 500m)</option>
+          <option value="1000">Dampak Sedang (Radius 1km)</option>
+          <option value="3000">Dampak Luas (Radius 3km)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 5px">
+        <div class="input-group" style="flex: 1">
+          <input
+            type="text"
+            id="inputLat"
+            class="readonly-input"
+            placeholder="Lat"
+            readonly
+          />
+        </div>
+        <div class="input-group" style="flex: 1">
+          <input
+            type="text"
+            id="inputLng"
+            class="readonly-input"
+            placeholder="Lng"
+            readonly
+          />
+        </div>
+      </div>
+
+      <button class="btn-kirim" onclick="simpanLaporan()">KIRIM LAPORAN</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="data/bencana_2024.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
